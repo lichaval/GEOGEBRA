@@ -1,0 +1,8 @@
+data _null_;
+infile x recfm=f lrecl=1 end=eof;
+file z recfm=f lrecl=1;
+input @1 x $char1.;
+put @1 x $char1.;
+if eof;
+call symputx('filesize',_n_);
+run;
