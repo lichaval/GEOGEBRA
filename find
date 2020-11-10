@@ -1,0 +1,17 @@
+data _null_;
+infile z recfm=f lrecl=&filesize. eof=done;
+input @ '<div class="altroute‐rcol altroute‐info"> <span>' @;
+input text $50.;
+distance = input(scan(text,1," "),comma12.);
+units = scan(text,2,"< ");
+time = scan(text,5,"<>");
+file print;
+put "DRIVING DISTANCE BETWEEN &ll1 AND &ll2 : "
+distance units" (TIME: " time ")";
+stop;
+done:
+file print;
+put "CANNOT FIND THE DRIVING DISTANCE BETWEEN &ll1 AND &ll2 : " /
+"TRY ANOTHER PAIR OF COORDINATES";
+stop;
+run;
